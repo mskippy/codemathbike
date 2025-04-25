@@ -1,0 +1,12 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Node modules (in case you add npm scripts later)
+node_modules/
+
+# Env files (in case you add API keys later)
+.env
