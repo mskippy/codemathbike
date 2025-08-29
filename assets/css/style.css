@@ -217,3 +217,63 @@ details > summary:hover::before, details > summary:focus::before { color: #47556
 
 /* Active link stays boldest */
 #sidebar .navlist a.active { font-weight: 700; }
+
+/* === Left nav cards (Home / Code / Math / Bike) === */
+#sidebar .nav-card{
+  background:#fff;
+  border:1px solid #eef2f7;
+  border-radius:12px;
+  padding:10px;
+  margin:0 0 10px 0;
+}
+#sidebar .nav-card > .toplink{
+  display:block;
+  padding:8px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;                 /* keep top-level bold by default */
+}
+#sidebar .nav-card > .toplink:hover{ background: var(--link-hover-bg); }
+#sidebar .nav-card > .toplink.active{
+  font-weight:700;                 /* if the top-level itself is the active page */
+  background: var(--link-hover-bg);
+}
+
+/* hide/show the children of each card depending on .open */
+#sidebar .nav-card .navlist{ margin-top:6px; }
+#sidebar .nav-card:not(.open) .navlist{ display:none; }
+
+/* keep your existing hover/active styles inside lists */
+#sidebar .nav-card .navlist a{ display:block; padding:6px 8px; border-radius:8px; }
+
+/* keep caret hidden, bold only on active link inside lists (from earlier rules) */
+
+
+/* === Simpler Home card in left sidebar === */
+#sidebar .nav-card[data-href="/"]{
+  background: transparent;   /* no card chrome */
+  border: 0;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+/* Home link: keep semi-bold, no bg hover/active */
+#sidebar .nav-card[data-href="/"] > .toplink{
+  display: inline-block;
+  padding: 6px 0;
+  border-radius: 0;
+  font-weight: 600;
+}
+#sidebar .nav-card[data-href="/"] > .toplink:hover{
+  background: transparent;
+  text-decoration: underline;
+}
+#sidebar .nav-card[data-href="/"] > .toplink.active{
+  background: transparent;   /* override the card active background */
+  font-weight: 700;          /* still a bit bolder when you're on Home */
+}
+
+/* Hide any Home children (we don't need them) */
+#sidebar .nav-card[data-href="/"] .navlist{
+  display: none !important;
+}

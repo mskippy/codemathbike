@@ -68,25 +68,21 @@ function renderItem(node) {
   }
 }
 
-function buildSidebar() {
+function buildSidebar(){
   const container = document.getElementById("sidebar");
-  if (!container) return; // no sidebar on this page
+  if (!container) return;
 
-  // Title
-  if (!container.querySelector(".unit-title")) {
-    const h2 = document.createElement("h2");
-    h2.className = "unit-title";
-    h2.textContent = "Navigation";
-    container.appendChild(h2);
-  }
+  // clear and add title
+  container.innerHTML = "";
+  const h2 = document.createElement("h2");
+  h2.className = "unit-title";
+  h2.textContent = "Navigation";
+  container.appendChild(h2);
 
-  // Tree
-  const ul = document.createElement("ul");
-  ul.className = "navlist";
-  NAV.forEach(node => ul.appendChild(renderItem(node)));
-  container.appendChild(ul);
+  // render each top-level NAV item as its own card
+  NAV.forEach(node => container.appendChild(renderTopLevelCard(node)));
 
-  // Activate current link + open ancestors
+  // activate current link and open the right card
   const currentPath = window.location.pathname.toLowerCase();
   const links = container.querySelectorAll("a[href]");
   let best = null, bestLen = -1;
@@ -94,23 +90,26 @@ function buildSidebar() {
   links.forEach(a => {
     const href = a.getAttribute("href");
     const len = longestPrefixMatch(currentPath, href);
-    if (len > bestLen) { bestLen = len; best = a; }
+    if (len > bestLen){ bestLen = len; best = a; }
   });
 
-  if (best) {
+  if (best){
     best.classList.add("active");
     best.setAttribute("aria-current", "page");
+
+    // open the matching top-level card
+    const card = best.closest(".nav-card");
+    if (card) card.classList.add("open");
+
+    // open any nested <details> (Units/Lessons) so the path is visible
     let el = best.parentElement;
-    while (el && el !== container) {
+    while (el && el !== container){
       if (el.tagName.toLowerCase() === "details") el.open = true;
       el = el.parentElement;
     }
-    container.querySelectorAll("details[data-href]").forEach(d => {
-      const len = longestPrefixMatch(currentPath, d.dataset.href || "");
-      if (len > 0) d.open = true;
-    });
   }
 }
+
 
 /* -------------------------------
    Hook up other small enhancers here
@@ -214,4 +213,27 @@ function autoTitleFromNav() {
 
   // Breadcrumb (optional but handy)
   renderBreadcrumb(chain);
+}
+
+
+function renderTopLevelCard(node){
+  const card = document.createElement("div");
+  card.className = "nav-card";
+  card.dataset.href = node.href || "/";
+
+  // top link (the card header)
+  const top = document.createElement("a");
+  top.className = "toplink";
+  top.href = node.href || "/";
+  top.textContent = node.label;
+  card.appendChild(top);
+
+  // children (if any)
+  if (node.children && node.children.length){
+    const ul = document.createElement("ul");
+    ul.className = "navlist";
+    node.children.forEach(child => ul.appendChild(renderItem(child)));
+    card.appendChild(ul);
+  }
+  return card;
 }
