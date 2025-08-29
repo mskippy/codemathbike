@@ -204,3 +204,16 @@ details > summary:hover::before, details > summary:focus::before { color: #47556
   border-left: 0 !important;           /* remove left guide line if you added it */
 }
 #sidebar .navlist li { margin-left: 0; } /* ensure no residual indent */
+
+/* Top-level Code/Math/Bike: keep bold by default */
+#sidebar .navlist > details > summary > a[href^="/code/"],
+#sidebar .navlist > details > summary > a[href^="/math/"],
+#sidebar .navlist > details > summary > a[href^="/bike/"],
+#sidebar .navlist > li > a[href^="/code/"],
+#sidebar .navlist > li > a[href^="/math/"],
+#sidebar .navlist > li > a[href^="/bike/"] {
+  font-weight: 600;
+}
+
+/* Active link stays boldest */
+#sidebar .navlist a.active { font-weight: 700; }
