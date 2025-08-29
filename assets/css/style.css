@@ -58,3 +58,19 @@ body {
     margin-top: 2em;
   }
   
+  .card {
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 12px;
+    padding: 16px;
+    align-self: start;
+  }
+  .card h1, .card h2, .card h3 { margin-top: 0; }
+
+/* sidebar indentation */
+  #sidebar .navlist ul {
+    margin: .25rem 0 .5rem .5rem;
+    padding-left: .75rem;
+    border-left: 2px solid #eef2f7;
+  }
+  
