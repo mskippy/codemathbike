@@ -169,6 +169,29 @@ kbd{
 .list-tight{ margin:0; padding-left:1.1rem; }
 .list-tight li + li{ margin-top:.25rem; }
 
+/* Lesson pager (prev/next) */
+.lesson-pager{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* prev left, next right */
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.lesson-pager .prev{ margin-right: auto; }
+.lesson-pager .next{ margin-left: auto; }
+
+/* (optional) make them look like subtle buttons */
+.lesson-pager a{
+  display: inline-block;
+  padding: .5rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  text-decoration: none;
+}
+.lesson-pager a:hover{ background: var(--hover-bg); }
+
+
 /* =========================================================
    4) DETAILS/SUMMARY (global content carats)
    ========================================================= */
