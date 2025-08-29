@@ -67,12 +67,24 @@ body {
   }
   .card h1, .card h2, .card h3 { margin-top: 0; }
 
-/* sidebar indentation */
-  #sidebar .navlist ul {
-    margin: .25rem 0 .5rem .5rem;
-    padding-left: .75rem;
-    border-left: 2px solid #eef2f7;
-  }
+/* sidebar indentation — Section → ICT 8 (L1), ICT 8 → Unit (L2) */
+#sidebar .navlist > details > ul.navlist {
+  margin-left: .25rem;
+  padding-left: .75rem;
+  border-left: 2px solid #eef2f7;
+}
+#sidebar .navlist > details > ul.navlist > details > ul.navlist {
+  margin-left: .25rem;
+  padding-left: .75rem;
+  border-left: 2px solid #eef2f7;
+}
+/* Level 3+ (lessons) — no extra indent */
+#sidebar .navlist ul ul ul {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+
 
   /* Grid shell: left sidebar / content / (optional) right sidebar */
 .unit-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
@@ -165,15 +177,23 @@ details > summary::before {
 details[open] > summary::before { transform: rotate(90deg); }
 details > summary:hover::before, details > summary:focus::before { color: #475569; }
 
-/* === Sidebar: remove caret + indentation (keep hover highlights) === */
-#sidebar details > summary {
-  padding-left: 0 !important;          /* no extra left space */
-}
+/* === Sidebar: hide caret; active bold only (no flatten) === */
 #sidebar details > summary::before,
 #sidebar details > summary::-webkit-details-marker {
-  content: none !important;             /* no triangle */
   display: none !important;
+  content: none !important;
 }
+
+/* Sidebar links are normal weight by default, active = bold */
+#sidebar details > summary,
+#sidebar details > summary a,
+#sidebar .navlist a {
+  font-weight: 400;              /* overrides global a{font-weight:600} */
+}
+#sidebar .navlist a.active {
+  font-weight: 700;
+}
+
 
 /* flatten nested lists */
 #sidebar .navlist,
