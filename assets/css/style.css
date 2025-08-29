@@ -277,3 +277,18 @@ details > summary:hover::before, details > summary:focus::before { color: #47556
 #sidebar .nav-card[data-href="/"] .navlist{
   display: none !important;
 }
+
+/* Two-column utility (collapses on small screens) */
+.two-col{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;         /* row / column gaps */
+  align-items: start;     /* cards don’t stretch equal height */
+}
+@media (max-width: 900px){
+  .two-col{ grid-template-columns: 1fr; }
+}
+
+/* Optional: tighter lists used in those cards */
+.list-tight{ margin: 0; padding-left: 1.1rem; }
+.list-tight li + li{ margin-top: .25rem; }

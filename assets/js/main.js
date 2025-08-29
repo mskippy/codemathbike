@@ -110,6 +110,24 @@ function buildSidebar(){
   }
 }
 
+function highlightRightRail() {
+  const rr = document.getElementById("sidebar-right");
+  if (!rr) return;
+  const here = window.location.pathname.toLowerCase();
+  rr.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    // resolve relative href against current page
+    const url = new URL(href, window.location.origin + here).pathname.toLowerCase();
+    if (url === here) a.classList.add('active');
+  });
+}
+
+// in init():
+function init() {
+  buildSidebar();
+  autoTitleFromNav();
+  highlightRightRail(); // ← add this
+}
 
 /* -------------------------------
    Hook up other small enhancers here
