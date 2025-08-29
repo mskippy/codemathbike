@@ -1,147 +1,125 @@
-/* Reset and base styling */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f9;
-    color: #333;
-    margin: 40px;
-    padding: 0;
-    line-height: 1.6;
-  }
-  
-  h1 {
-    font-size: 2em;
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  
-  p, li {
-    font-size: 1rem;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  li {
-    margin: 10px 0;
-  }
-  
-  a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  
-  a:hover {
-    color: #1abc9c;
-    text-decoration: underline;
-  }
-  
-  code {
-    background-color: #ecf0f1;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-family: Consolas, monospace;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
-    border-radius: 8px;
-  }
-  
-  div {
-    margin-top: 2em;
-  }
-  
-  .card {
-    background: #fff;
-    border: 1px solid #eef2f7;
-    border-radius: 12px;
-    padding: 16px;
-    align-self: start;
-  }
-  .card h1, .card h2, .card h3 { margin-top: 0; }
-
-/* sidebar indentation — Section → ICT 8 (L1), ICT 8 → Unit (L2) */
-#sidebar .navlist > details > ul.navlist {
-  margin-left: .25rem;
-  padding-left: .75rem;
-  border-left: 2px solid #eef2f7;
-}
-#sidebar .navlist > details > ul.navlist > details > ul.navlist {
-  margin-left: .25rem;
-  padding-left: .75rem;
-  border-left: 2px solid #eef2f7;
-}
-/* Level 3+ (lessons) — no extra indent */
-#sidebar .navlist ul ul ul {
-  margin-left: 0;
-  padding-left: 0;
-  border-left: 0;
+/* =========================================================
+   0) ROOT TOKENS (site-wide)
+   ========================================================= */
+:root{
+  --border: #e5e7eb;
+  --hover-bg: #eef6ff;         /* used for left-nav hover */
 }
 
+/* =========================================================
+   1) RESET & BASE TYPOGRAPHY
+   ========================================================= */
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  margin: 40px;
+  padding: 0;
+  line-height: 1.6;
+}
 
-  /* Grid shell: left sidebar / content / (optional) right sidebar */
-.unit-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
-.unit-shell.layout-3 { grid-template-columns: 280px 1fr 280px; gap: 16px; }
+h1{
+  font-size: 2em;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+p, li{ font-size: 1rem; }
+
+ul{ list-style-type: none; padding-left: 0; }
+li{ margin: 10px 0; }
+
+a{
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;            /* global links semi-bold (overridden in sidebar) */
+}
+a:hover{ color: #1abc9c; text-decoration: underline; }
+
+code{
+  background-color: #ecf0f1;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+div{ margin-top: 2em; }
+
+/* =========================================================
+   2) LAYOUT: GRID SHELL + REGIONS
+   ========================================================= */
+.unit-shell{ display:grid; grid-template-columns: 280px 1fr; min-height:100vh; }
+.unit-shell.layout-3{ grid-template-columns: 280px 1fr 280px; gap:16px; }
 
 /* Left sidebar */
-#sidebar {
-  position: sticky; top: 0; height: 100vh; overflow-y: auto;
-  padding: 1.25rem; border-right: 1px solid #e5e7eb; background: #fafafa;
+#sidebar{
+  position: sticky; top: 0; height: 100vh; overflow-y:auto;
+  padding: 1.25rem; border-right: 1px solid var(--border); background: #fafafa;
 }
-#sidebar > * + * { margin-top: .6rem; }
-#sidebar .unit-title { margin: 0 0 .5rem; font-size: 1.25rem; }
-#sidebar .unit-sub { margin: 0 0 .75rem; opacity: .8; font-size: .95rem; }
-#sidebar .navlist { list-style: none; margin: .75rem 0 0; padding: 0; }
-#sidebar .navlist li + li { margin-top: .25rem; }
-#sidebar .navlist a { display: block; padding: .5rem .6rem; border-radius: .5rem; color: inherit; text-decoration: none; }
-#sidebar .navlist a:hover { background: #eef6ff; }
-#sidebar .navlist a.active { background: #e5f1ff; font-weight: 700; }
+#sidebar > * + *{ margin-top: .6rem; }
+#sidebar .unit-title{ margin: 0 0 .5rem; font-size: 1.25rem; }
+#sidebar .unit-sub{ margin: 0 0 .75rem; opacity:.8; font-size:.95rem; }
+#sidebar .navlist{ list-style:none; margin:.75rem 0 0; padding:0; }
+#sidebar .navlist li + li{ margin-top:.25rem; }
+#sidebar .navlist a{
+  display:block; padding:.5rem .6rem; border-radius:.5rem; color:inherit; text-decoration:none;
+}
+#sidebar .navlist a:hover{ background: var(--hover-bg); }
+#sidebar .navlist a.active{ background:#e5f1ff; font-weight:700; } /* active = boldest */
 
-/* Content */
-#content {
+/* Main content */
+#content{
   padding: 2rem 1.5rem 4rem;
   max-width: 1000px;
-  display: grid;
-  gap: 1rem;
-  grid-auto-rows: max-content;
+  display: grid; gap: 1rem; grid-auto-rows:max-content;
 }
 
 /* Right sidebar */
-#sidebar-right {
-  position: sticky; top: 0; max-height: 100vh; overflow-y: auto;
-  padding: 1.25rem; border-left: 1px solid #e5e7eb; background: #fafafa;
-  display: grid; gap: 1rem; grid-auto-rows: max-content;
-  align-content: start; align-items: start; justify-content: start; justify-items: stretch;
+#sidebar-right{
+  position: sticky; top: 0; max-height: 100vh; overflow-y:auto;
+  padding: 1.25rem; border-left: 1px solid var(--border); background:#fafafa;
+  display:grid; gap:1rem; grid-auto-rows:max-content;
+  align-content:start; align-items:start; justify-content:start; justify-items:stretch;
 }
 
 /* Responsive collapse to single column */
-@media (max-width: 900px){
-  .unit-shell, .unit-shell.layout-3 { grid-template-columns: 1fr; }
-  #sidebar, #sidebar-right { position: static; height: auto; border: 0; }
+@media (max-width:900px){
+  .unit-shell, .unit-shell.layout-3{ grid-template-columns: 1fr; }
+  #sidebar, #sidebar-right{ position: static; height:auto; border:0; }
 }
 
-/*Inline code + keyboard keys (for lesson instructions) */
+/* =========================================================
+   3) CARDS & COMMON COMPONENTS
+   ========================================================= */
+.card{
+  background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:16px; align-self:start;
+}
+.card h1, .card h2, .card h3{ margin-top:0; }
+
+/* Inline code + keyboard keys (for lesson instructions) */
 code:not(pre code){
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   background:#f3f4f6; color:#111827; border:1px solid #e5e7eb;
   padding:.15rem .40rem; border-radius:.40rem; font-size:1rem; line-height:1.2; white-space:nowrap;
 }
-pre code { background: transparent; border: 0; padding: 0; font-size: .95rem; }
+pre code{ background:transparent; border:0; padding:0; font-size:.95rem; }
 kbd{
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   background:#f3f4f6; color:#111827; border:1px solid #e5e7eb; border-bottom-width:2px;
   border-radius:.40rem; padding:.10rem .35rem; font-size:.95rem; white-space:nowrap;
 }
 
-/*Compact schedule/grade tables */
-.table-wrap { overflow:auto; margin-bottom:12px; }
+/* Compact schedule/grade tables */
+.table-wrap{ overflow:auto; margin-bottom:12px; }
 .schedule-table{
   width:100%; border-collapse:collapse; font-size:.9rem; border:1px solid #e5e7eb; background:#fff;
 }
@@ -150,12 +128,12 @@ kbd{
 }
 .schedule-table td{ padding:8px 10px; border-bottom:1px solid #e5e7eb; vertical-align:top; }
 .schedule-table tbody tr:nth-child(even){ background:#fcfdff; }
-.schedule-table .row-break td,.schedule-table .row-lunch td{
+.schedule-table .row-break td,
+.schedule-table .row-lunch td{
   text-align:center; font-style:italic; color:#555; background:#f9fafb;
 }
 
-
-/*Two column bullet utility */
+/* Media/compare + submit row */
 .compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
 .compare-grid figure{ margin:0; text-align:center; }
 .compare-grid img{ width:100%; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.1); }
@@ -164,131 +142,87 @@ kbd{
   cursor:pointer; text-decoration:none;
 }
 
-/* Details/summary */
-details > summary {
-  display: flex; align-items: center; gap: .5rem;
-  font-weight: normal; color: #334155; cursor: pointer; list-style: none;
-}
-details > summary::-webkit-details-marker { display: none; }
-details > summary::before {
-  content: "▸"; display: inline-block; font-size: 1.25em; line-height: 1;
-  color: #64748b; transition: transform 160ms ease, color 160ms ease;
-}
-details[open] > summary::before { transform: rotate(90deg); }
-details > summary:hover::before, details > summary:focus::before { color: #475569; }
-
-/* === Sidebar: hide caret; active bold only (no flatten) === */
-#sidebar details > summary::before,
-#sidebar details > summary::-webkit-details-marker {
-  display: none !important;
-  content: none !important;
-}
-
-/* Sidebar links are normal weight by default, active = bold */
-#sidebar details > summary,
-#sidebar details > summary a,
-#sidebar .navlist a {
-  font-weight: 400;              /* overrides global a{font-weight:600} */
-}
-#sidebar .navlist a.active {
-  font-weight: 700;
-}
-
-
-/* flatten nested lists */
-#sidebar .navlist,
-#sidebar .navlist ul {
-  list-style: none;
-  margin: 0;
-  padding-left: 0 !important;          /* remove indent */
-  border-left: 0 !important;           /* remove left guide line if you added it */
-}
-#sidebar .navlist li { margin-left: 0; } /* ensure no residual indent */
-
-/* Top-level Code/Math/Bike: keep bold by default */
-#sidebar .navlist > details > summary > a[href^="/code/"],
-#sidebar .navlist > details > summary > a[href^="/math/"],
-#sidebar .navlist > details > summary > a[href^="/bike/"],
-#sidebar .navlist > li > a[href^="/code/"],
-#sidebar .navlist > li > a[href^="/math/"],
-#sidebar .navlist > li > a[href^="/bike/"] {
-  font-weight: 600;
-}
-
-/* Active link stays boldest */
-#sidebar .navlist a.active { font-weight: 700; }
-
-/* === Left nav cards (Home / Code / Math / Bike) === */
-#sidebar .nav-card{
-  background:#fff;
-  border:1px solid #eef2f7;
-  border-radius:12px;
-  padding:10px;
-  margin:0 0 10px 0;
-}
-#sidebar .nav-card > .toplink{
-  display:block;
-  padding:8px 10px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:600;                 /* keep top-level bold by default */
-}
-#sidebar .nav-card > .toplink:hover{ background: var(--link-hover-bg); }
-#sidebar .nav-card > .toplink.active{
-  font-weight:700;                 /* if the top-level itself is the active page */
-  background: var(--link-hover-bg);
-}
-
-/* hide/show the children of each card depending on .open */
-#sidebar .nav-card .navlist{ margin-top:6px; }
-#sidebar .nav-card:not(.open) .navlist{ display:none; }
-
-/* keep your existing hover/active styles inside lists */
-#sidebar .nav-card .navlist a{ display:block; padding:6px 8px; border-radius:8px; }
-
-/* keep caret hidden, bold only on active link inside lists (from earlier rules) */
-
-
-/* === Simpler Home card in left sidebar === */
-#sidebar .nav-card[data-href="/"]{
-  background: transparent;   /* no card chrome */
-  border: 0;
-  padding: 0;
-  margin: 0 0 10px 0;
-}
-
-/* Home link: keep semi-bold, no bg hover/active */
-#sidebar .nav-card[data-href="/"] > .toplink{
-  display: inline-block;
-  padding: 6px 0;
-  border-radius: 0;
-  font-weight: 600;
-}
-#sidebar .nav-card[data-href="/"] > .toplink:hover{
-  background: transparent;
-  text-decoration: underline;
-}
-#sidebar .nav-card[data-href="/"] > .toplink.active{
-  background: transparent;   /* override the card active background */
-  font-weight: 700;          /* still a bit bolder when you're on Home */
-}
-
-/* Hide any Home children (we don't need them) */
-#sidebar .nav-card[data-href="/"] .navlist{
-  display: none !important;
-}
-
 /* Two-column utility (collapses on small screens) */
 .two-col{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem 2rem;         /* row / column gaps */
-  align-items: start;     /* cards don’t stretch equal height */
+  display:grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; align-items:start;
 }
-@media (max-width: 900px){
-  .two-col{ grid-template-columns: 1fr; }
+@media (max-width:900px){ .two-col{ grid-template-columns:1fr; } }
+
+/* Optional tighter lists inside cards */
+.list-tight{ margin:0; padding-left:1.1rem; }
+.list-tight li + li{ margin-top:.25rem; }
+
+/* =========================================================
+   4) DETAILS/SUMMARY (global content carats)
+   ========================================================= */
+details > summary{
+  display:flex; align-items:center; gap:.5rem; font-weight:normal; color:#334155; cursor:pointer; list-style:none;
+}
+details > summary::-webkit-details-marker{ display:none; }
+details > summary::before{
+  content:"▸"; display:inline-block; font-size:1.25em; line-height:1;
+  color:#64748b; transition: transform 160ms ease, color 160ms ease;
+}
+details[open] > summary::before{ transform: rotate(90deg); }
+details > summary:hover::before,
+details > summary:focus::before{ color:#475569; }
+
+/* =========================================================
+   5) LEFT NAV: INDENTS, WEIGHTS & CARDS
+   ========================================================= */
+
+/* 5a) Hide caret ONLY inside the left sidebar tree */
+#sidebar details > summary::before,
+#sidebar details > summary::-webkit-details-marker{
+  display:none !important; content:none !important;
 }
 
-/* Optional: tighter lists used in those cards */
-.list-tight{ margin: 0; padding-left: 1.1rem; }
-.list-tight li + li{ margin-top: .25rem; }
+/* 5b) Indentation — Section → ICT 8 (Level 1), ICT 8 → Unit (Level 2) */
+#sidebar .navlist > details > ul.navlist{
+  margin-left:.25rem; padding-left:.75rem; border-left:2px solid #eef2f7;
+}
+#sidebar .navlist > details > ul.navlist > details > ul.navlist{
+  margin-left:.25rem; padding-left:.75rem; border-left:2px solid #eef2f7;
+}
+/* Level 3+ (lessons) — no extra indent */
+#sidebar .navlist ul ul ul{ margin-left:0; padding-left:0; border-left:0; }
+
+/* 5c) Weights — normal everywhere in tree, active = bold; top-level semi-bold */
+#sidebar details > summary,
+#sidebar details > summary a,
+#sidebar .navlist a{ font-weight:400; }       /* override global a{600} */
+#sidebar .navlist a.active{ font-weight:700; } /* active lesson/link bold */
+#sidebar .nav-card details:has(.active) > summary > a{ font-weight:700; } /* active UNIT bold */
+
+/* 5d) Top-level cards (Home / Code / Math / Bike) */
+#sidebar .nav-card{
+  background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:10px; margin:0 0 10px 0;
+}
+#sidebar .nav-card > .toplink{
+  display:block; padding:8px 10px; border-radius:8px; text-decoration:none;
+  font-weight:600;                         /* top-level semi-bold by default */
+}
+#sidebar .nav-card > .toplink:hover{ background: var(--hover-bg); }
+#sidebar .nav-card > .toplink.active{
+  font-weight:700; background: var(--hover-bg);
+}
+
+/* Children inside cards */
+#sidebar .nav-card .navlist{ margin-top:6px; }
+#sidebar .nav-card:not(.open) .navlist{ display:none; }
+#sidebar .nav-card .navlist a{ display:block; padding:6px 8px; border-radius:8px; }
+
+/* 5e) Simpler Home card */
+#sidebar .nav-card[data-href="/"]{
+  background:transparent; border:0; padding:0; margin:0 0 10px 0;
+}
+#sidebar .nav-card[data-href="/"] > .toplink{
+  display:inline-block; padding:6px 0; border-radius:0; font-weight:600;
+}
+#sidebar .nav-card[data-href="/"] > .toplink:hover{
+  background:transparent; text-decoration:underline;
+}
+#sidebar .nav-card[data-href="/"] > .toplink.active{
+  background:transparent; font-weight:700;
+}
+#sidebar .nav-card[data-href="/"] .navlist{ display:none !important; }
