@@ -122,3 +122,96 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+
+/* ---------- Auto title + H1 + breadcrumb from NAV ---------- */
+
+const SITE_TITLE_SUFFIX = " · codemathbike";  // shown in the browser tab
+
+function flattenNav(nav, parent = null, out = []) {
+  for (const node of nav) {
+    const copy = { ...node, parent };
+    out.push(copy);
+    if (node.children && node.children.length) flattenNav(node.children, copy, out);
+  }
+  return out;
+}
+function findBestNavMatch(pathname) {
+  const nodes = flattenNav(NAV);
+  const p = pathname.toLowerCase();
+  let best = null, bestLen = -1;
+  for (const n of nodes) {
+    const href = n.href || "";
+    const len = longestPrefixMatch(p, href);
+    if (len > bestLen) { bestLen = len; best = n; }
+  }
+  return best;
+}
+function chainToRoot(node) {
+  const chain = [];
+  let cur = node;
+  while (cur) { chain.unshift(cur); cur = cur.parent || null; }
+  return chain;
+}
+function ensurePageTitleElement() {
+  // Prefer an existing .page-title; otherwise create one at top of #content
+  let h1 = document.querySelector(".page-title") || document.querySelector("h1");
+  if (!h1) {
+    const content = document.getElementById("content") || document.body;
+    h1 = document.createElement("h1");
+    h1.className = "page-title";
+    content.prepend(h1);
+  }
+  return h1;
+}
+function renderBreadcrumb(chain) {
+  // Create (or reuse) a small breadcrumb just above main content
+  const content = document.getElementById("content");
+  if (!content) return;
+  let bc = document.getElementById("breadcrumb");
+  if (!bc) {
+    bc = document.createElement("p");
+    bc.id = "breadcrumb";
+    bc.className = "small";
+    content.prepend(bc);
+  } else {
+    bc.innerHTML = "";
+  }
+  // Link all but the last item
+  chain.forEach((n, i) => {
+    if (i) bc.append(" › ");
+    if (i < chain.length - 1) {
+      const a = document.createElement("a");
+      a.href = n.href;
+      a.textContent = n.label;
+      bc.append(a);
+    } else {
+      // current page
+      const strong = document.createElement("strong");
+      strong.textContent = n.label;
+      bc.append(strong);
+    }
+  });
+}
+function autoTitleFromNav() {
+  // Opt-out: <body data-auto-title="off">
+  if (document.body?.dataset?.autoTitle === "off") return;
+
+  const best = findBestNavMatch(window.location.pathname);
+  if (!best) return;
+
+  const chain = chainToRoot(best);
+
+  // <title> = chain joined + site suffix
+  const chainText = chain.map(n => n.label).join(" · ");
+  document.title = chainText + SITE_TITLE_SUFFIX;
+
+  // <h1> = the leaf label (unless page locked it)
+  const h1 = ensurePageTitleElement();
+  if (h1 && h1.dataset.lock !== "true") {
+    h1.textContent = best.label;
+  }
+
+  // Breadcrumb (optional but handy)
+  renderBreadcrumb(chain);
+}
