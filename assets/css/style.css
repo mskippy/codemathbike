@@ -39,7 +39,13 @@ h1{
 
 p, li{ font-size: 1rem; }
 
-ul{ list-style-type: none; padding-left: 0; }
+/* default content lists: show bullets */
+ul{
+  list-style: circle outside;   /* use disc if you prefer solid bullets */
+  padding-left: 1.25rem;
+  margin: 0 0 1rem 0;
+}
+
 li{ margin: 10px 0; }
 
 a{
