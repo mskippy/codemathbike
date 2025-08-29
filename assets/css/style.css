@@ -73,4 +73,94 @@ body {
     padding-left: .75rem;
     border-left: 2px solid #eef2f7;
   }
-  
+
+  /* Grid shell: left sidebar / content / (optional) right sidebar */
+.unit-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+.unit-shell.layout-3 { grid-template-columns: 280px 1fr 280px; gap: 16px; }
+
+/* Left sidebar */
+#sidebar {
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  padding: 1.25rem; border-right: 1px solid #e5e7eb; background: #fafafa;
+}
+#sidebar > * + * { margin-top: .6rem; }
+#sidebar .unit-title { margin: 0 0 .5rem; font-size: 1.25rem; }
+#sidebar .unit-sub { margin: 0 0 .75rem; opacity: .8; font-size: .95rem; }
+#sidebar .navlist { list-style: none; margin: .75rem 0 0; padding: 0; }
+#sidebar .navlist li + li { margin-top: .25rem; }
+#sidebar .navlist a { display: block; padding: .5rem .6rem; border-radius: .5rem; color: inherit; text-decoration: none; }
+#sidebar .navlist a:hover { background: #eef6ff; }
+#sidebar .navlist a.active { background: #e5f1ff; font-weight: 700; }
+
+/* Content */
+#content {
+  padding: 2rem 1.5rem 4rem;
+  max-width: 1000px;
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: max-content;
+}
+
+/* Right sidebar */
+#sidebar-right {
+  position: sticky; top: 0; max-height: 100vh; overflow-y: auto;
+  padding: 1.25rem; border-left: 1px solid #e5e7eb; background: #fafafa;
+  display: grid; gap: 1rem; grid-auto-rows: max-content;
+  align-content: start; align-items: start; justify-content: start; justify-items: stretch;
+}
+
+/* Responsive collapse to single column */
+@media (max-width: 900px){
+  .unit-shell, .unit-shell.layout-3 { grid-template-columns: 1fr; }
+  #sidebar, #sidebar-right { position: static; height: auto; border: 0; }
+}
+
+/*Inline code + keyboard keys (for lesson instructions) */
+code:not(pre code){
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  background:#f3f4f6; color:#111827; border:1px solid #e5e7eb;
+  padding:.15rem .40rem; border-radius:.40rem; font-size:1rem; line-height:1.2; white-space:nowrap;
+}
+pre code { background: transparent; border: 0; padding: 0; font-size: .95rem; }
+kbd{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  background:#f3f4f6; color:#111827; border:1px solid #e5e7eb; border-bottom-width:2px;
+  border-radius:.40rem; padding:.10rem .35rem; font-size:.95rem; white-space:nowrap;
+}
+
+/*Compact schedule/grade tables */
+.table-wrap { overflow:auto; margin-bottom:12px; }
+.schedule-table{
+  width:100%; border-collapse:collapse; font-size:.9rem; border:1px solid #e5e7eb; background:#fff;
+}
+.schedule-table thead th{
+  text-align:left; padding:8px 10px; background:#f3f4f6; border-bottom:1px solid #e5e7eb;
+}
+.schedule-table td{ padding:8px 10px; border-bottom:1px solid #e5e7eb; vertical-align:top; }
+.schedule-table tbody tr:nth-child(even){ background:#fcfdff; }
+.schedule-table .row-break td,.schedule-table .row-lunch td{
+  text-align:center; font-style:italic; color:#555; background:#f9fafb;
+}
+
+
+/*Two column bullet utility */
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+.compare-grid figure{ margin:0; text-align:center; }
+.compare-grid img{ width:100%; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.1); }
+.submit-row .btn{
+  padding:.5rem 1rem; border-radius:10px; border:1px solid #e5e7eb; background:#fff;
+  cursor:pointer; text-decoration:none;
+}
+
+/* Details/summary */
+details > summary {
+  display: flex; align-items: center; gap: .5rem;
+  font-weight: normal; color: #334155; cursor: pointer; list-style: none;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+  content: "▸"; display: inline-block; font-size: 1.25em; line-height: 1;
+  color: #64748b; transition: transform 160ms ease, color 160ms ease;
+}
+details[open] > summary::before { transform: rotate(90deg); }
+details > summary:hover::before, details > summary:focus::before { color: #475569; }
