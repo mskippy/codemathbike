@@ -9,14 +9,14 @@ const NAV = [
 
   { label: "Code", href: "/code/", children: [
     { label: "ICT 8", href: "/code/ict8/", children: [
-      { label: "Unit 1", href: "/code/ict8/units/u1_essential_skills/", children: [
-        { label: "Lesson 1.1", href: "/code/ict8/units/u1_essential_skills/lesson_1_1.html" },
-        { label: "Lesson 1.2", href: "/code/ict8/units/u1_essential_skills/lesson_1_2.html" },
-        { label: "Lesson 1.3", href: "/code/ict8/units/u1_essential_skills/lesson_1_3.html" },
+      { label: "U1 Essential Skills", href: "/code/ict8/units/u1_essential_skills/", children: [
+        { label: "1.1 Welcome to ICT 8", href: "/code/ict8/units/u1_essential_skills/lesson_1_1.html" },
+        { label: "1.2 Typing & File Management", href: "/code/ict8/units/u1_essential_skills/lesson_1_2.html" },
+        { label: "1.3 Parts of a Computer", href: "/code/ict8/units/u1_essential_skills/lesson_1_3.html" },
       ]},
-      { label: "Unit 2", href: "/code/ict8/units/u2_word_excel/", children: [ /* add lessons */ ]},
-      { label: "Unit 3", href: "/code/ict8/units/u3_game_dev/", children: [] },
-      { label: "Unit 4", href: "/code/ict8/units/u4_web_dev/", children: [] },
+      { label: "U2 Digital Media", href: "/code/ict8/units/u2_digital_media/", children: [ /* add lessons */ ]},
+      { label: "U3 Game Development", href: "/code/ict8/units/u3_game_dev/", children: [] },
+      { label: "U4 Web Development", href: "/code/ict8/units/u4_web_dev/", children: [] },
     ]},
   ]},
 
