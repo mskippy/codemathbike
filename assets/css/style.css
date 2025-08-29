@@ -1,4 +1,15 @@
 /* =========================================================
+   STYLE GUIDE: quick index
+   0) ROOT TOKENS
+   1) RESET & BASE TYPOGRAPHY
+   2) LAYOUT: GRID SHELL + REGIONS
+   3) CARDS & COMMON COMPONENTS
+   4) DETAILS/SUMMARY (content)
+   5) LEFT NAV: INDENTS, WEIGHTS & CARDS
+   ========================================================= */
+
+
+/* =========================================================
    0) ROOT TOKENS (site-wide)
    ========================================================= */
 :root{
