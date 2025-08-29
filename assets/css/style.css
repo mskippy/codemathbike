@@ -164,3 +164,23 @@ details > summary::before {
 }
 details[open] > summary::before { transform: rotate(90deg); }
 details > summary:hover::before, details > summary:focus::before { color: #475569; }
+
+/* === Sidebar: remove caret + indentation (keep hover highlights) === */
+#sidebar details > summary {
+  padding-left: 0 !important;          /* no extra left space */
+}
+#sidebar details > summary::before,
+#sidebar details > summary::-webkit-details-marker {
+  content: none !important;             /* no triangle */
+  display: none !important;
+}
+
+/* flatten nested lists */
+#sidebar .navlist,
+#sidebar .navlist ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0 !important;          /* remove indent */
+  border-left: 0 !important;           /* remove left guide line if you added it */
+}
+#sidebar .navlist li { margin-left: 0; } /* ensure no residual indent */
