@@ -6,26 +6,57 @@
   <title>CODE Courses</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    /* namespace to this page only */
-    body.code-page .code-landing { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-    body.code-page .course-grid {
+    /* --- compact CODE page styles (scoped) --- */
+    body.code-page { --container: 960px; --gap:16px; --card-min:220px; --card-pad:16px; --icon:64px; --title:18px; }
+  
+    body.code-page header h1{
+      font-size: 24px;           /* prevent global h1 from blowing up the title */
+      line-height: 1.25;
+      margin: 16px 0 8px;
+      text-align: center;
+    }
+  
+    body.code-page .code-landing{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 16px;
+    }
+  
+    body.code-page .course-grid{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: clamp(1rem, 2vw, 2rem);
+      grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+      gap: var(--gap);
       align-items: stretch;
     }
-    body.code-page .course-card {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem;
-      aspect-ratio: 4 / 3; padding: clamp(1.25rem, 2.5vw, 2rem);
-      border-radius: 1rem; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,.1);
-      text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s;
+  
+    body.code-page .course-card{
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: var(--card-pad);
+      aspect-ratio: 5 / 4;       /* shorter than 4/3; lowers perceived size */
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      text-decoration: none; color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease;
     }
-    body.code-page .course-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,.15); }
-    body.code-page .course-card img { width: 88px; height: 88px; aspect-ratio: 1/1; object-fit: contain; }
-    body.code-page .course-card h2 { margin: 0; font-size: clamp(1.1rem, 1.6vw, 1.35rem); text-align: center; text-wrap: balance; }
+    body.code-page .course-card:hover{ transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,.12); }
+  
+    body.code-page .course-card img{
+      width: var(--icon); height: var(--icon);
+      aspect-ratio: 1/1; object-fit: contain;
+    }
+  
+    body.code-page .course-card h2{
+      margin: 0;
+      font-size: var(--title);   /* fixed px keeps it compact */
+      line-height: 1.2;
+      text-align: center;
+    }
   </style>
+  
 </head>
-<body>
+<body class="code-page">
   <header>
     <h1 style="text-align:center;">CODE Courses</h1>
   </header>
