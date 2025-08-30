@@ -20,7 +20,7 @@ const NAV = [
     ]},
 
     { label: "ICT 9", href: "/code/ict9/", children: [
-      { label: "U1 Intro & Digital Citizenship", href: "/code/ict9/units/u1_intro_n_digital_citizenship/", children: [
+      { label: "U1 Intro & Digital Citizenship", href: "/code/ict9/units/u1_essential_skills/", children: [
         // Add lessons here, e.g.:
         // { label: "1.1 Course Outline & Expectations", href: "/code/ict9/units/u1_intro_n_digital_citizenship/lesson_1_1.html" },
         // { label: "1.2 20 Questions & Canva Poster", href: "/code/ict9/units/u1_intro_n_digital_citizenship/lesson_1_2.html" },
