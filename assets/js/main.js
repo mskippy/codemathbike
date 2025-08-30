@@ -196,19 +196,30 @@ function ensurePageTitleElement() {
   return h1;
 }
 function renderBreadcrumb(chain) {
-  // Create (or reuse) a small breadcrumb just above main content
-  const content = document.getElementById("content");
-  if (!content) return;
-  let bc = document.getElementById("breadcrumb");
-  if (!bc) {
-    bc = document.createElement("p");
-    bc.id = "breadcrumb";
-    bc.className = "small";
-    content.prepend(bc);
-  } else {
-    bc.innerHTML = "";
+  // Prefer the header’s title wrap; create one if missing
+  let target =
+    document.querySelector(".site-header .page-title-wrap") ||
+    document.querySelector(".site-header");
+
+  if (!target) {
+    // build a minimal header so crumbs never land in #content
+    const hdr = document.createElement("header");
+    hdr.className = "site-header";
+    const wrap = document.createElement("div");
+    wrap.className = "page-title-wrap";
+    hdr.appendChild(wrap);
+    document.body.prepend(hdr);
+    target = wrap;
   }
-  // Link all but the last item
+
+  // remove any old breadcrumb (e.g., ones previously injected in #content)
+  document.querySelectorAll("#breadcrumb").forEach(el => el.remove());
+
+  // build breadcrumb
+  const bc = document.createElement("p");
+  bc.id = "breadcrumb";
+  bc.className = "small";
+
   chain.forEach((n, i) => {
     if (i) bc.append(" › ");
     if (i < chain.length - 1) {
@@ -217,15 +228,17 @@ function renderBreadcrumb(chain) {
       a.textContent = n.label;
       bc.append(a);
     } else {
-      // current page
       const strong = document.createElement("strong");
       strong.textContent = n.label;
       bc.append(strong);
     }
   });
+
+  // Put crumbs ABOVE the H1 in the header
+  target.prepend(bc);
 }
+
 function autoTitleFromNav() {
-  // Opt-out: <body data-auto-title="off">
   if (document.body?.dataset?.autoTitle === "off") return;
 
   const best = findBestNavMatch(window.location.pathname);
@@ -233,17 +246,13 @@ function autoTitleFromNav() {
 
   const chain = chainToRoot(best);
 
-  // <title> = chain joined + site suffix
   const chainText = chain.map(n => n.label).join(" · ");
   document.title = chainText + SITE_TITLE_SUFFIX;
 
-  // <h1> = the leaf label (unless page locked it)
   const h1 = ensurePageTitleElement();
-  if (h1 && h1.dataset.lock !== "true") {
-    h1.textContent = best.label;
-  }
+  if (h1 && h1.dataset.lock !== "true") h1.textContent = best.label;
 
-  // Breadcrumb (optional but handy)
+  // Always render breadcrumb — now in the header
   renderBreadcrumb(chain);
 }
 
