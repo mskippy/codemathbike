@@ -12,16 +12,21 @@ const NAV = [
       { label: "U1 Essential Skills", href: "/code/ict8/units/u1_essential_skills/", children: [
         { label: "1.1 Welcome to ICT 8", href: "/code/ict8/units/u1_essential_skills/lesson_1_1.html" },
         { label: "1.2 Typing & File Management", href: "/code/ict8/units/u1_essential_skills/lesson_1_2.html" },
-        { label: "1.3 Parts of a Computer", href: "/code/ict8/units/u1_essential_skills/lesson_1_3.html" },
+        { label: "1.3 Parts of a Computer", href: "/code/ict8/units/u1_essential_skills/lesson_1_3.html" }
       ]},
-      { label: "U2 Digital Media", href: "/code/ict8/units/u2_digital_media/", children: [ /* add lessons */ ]},
+      { label: "U2 Digital Media", href: "/code/ict8/units/u2_digital_media/", children: [] },
       { label: "U3 Game Development", href: "/code/ict8/units/u3_game_dev/", children: [] },
-      { label: "U4 Web Development", href: "/code/ict8/units/u4_web_dev/", children: [] },
+      { label: "U4 Web Development", href: "/code/ict8/units/u4_web_dev/", children: [] }
     ]},
+
+    { label: "ICT 9", href: "/code/ict9/", children: [
+      { label: "U1 Game Development", href: "/code/ict9/units/u1_game_dev/", children: [] },
+      { label: "U2 Graphic Design", href: "/code/ict9/units/u2_graphic_design/", children: [] }
+    ]}
   ]},
 
   { label: "Math", href: "/math/" },
-  { label: "Bike", href: "/bike/" },
+  { label: "Bike", href: "/bike/" }
 ];
 
 /* -------------------------------
@@ -66,6 +71,28 @@ function renderItem(node) {
     li.appendChild(a);
     return li;
   }
+}
+
+function renderTopLevelCard(node){
+  const card = document.createElement("div");
+  card.className = "nav-card";
+  card.dataset.href = node.href || "/";
+
+  // top link (the card header)
+  const top = document.createElement("a");
+  top.className = "toplink";
+  top.href = node.href || "/";
+  top.textContent = node.label;
+  card.appendChild(top);
+
+  // children (if any)
+  if (node.children && node.children.length){
+    const ul = document.createElement("ul");
+    ul.className = "navlist";
+    node.children.forEach(child => ul.appendChild(renderItem(child)));
+    card.appendChild(ul);
+  }
+  return card;
 }
 
 function buildSidebar(){
@@ -122,27 +149,7 @@ function highlightRightRail() {
   });
 }
 
-// in init():
-function init() {
-  buildSidebar();
-  autoTitleFromNav();
-  highlightRightRail(); // ← add this
-}
-
-/* -------------------------------
-   Hook up other small enhancers here
-   (no-ops when not applicable)
----------------------------------*/
-function init() {
-  buildSidebar();
-  // add future initializers here (e.g., anchor copying, code copy buttons, etc.)
-}
-
-document.addEventListener("DOMContentLoaded", init);
-
-
 /* ---------- Auto title + H1 + breadcrumb from NAV ---------- */
-
 const SITE_TITLE_SUFFIX = " · codemathbike";  // shown in the browser tab
 
 function flattenNav(nav, parent = null, out = []) {
@@ -233,25 +240,12 @@ function autoTitleFromNav() {
   renderBreadcrumb(chain);
 }
 
-
-function renderTopLevelCard(node){
-  const card = document.createElement("div");
-  card.className = "nav-card";
-  card.dataset.href = node.href || "/";
-
-  // top link (the card header)
-  const top = document.createElement("a");
-  top.className = "toplink";
-  top.href = node.href || "/";
-  top.textContent = node.label;
-  card.appendChild(top);
-
-  // children (if any)
-  if (node.children && node.children.length){
-    const ul = document.createElement("ul");
-    ul.className = "navlist";
-    node.children.forEach(child => ul.appendChild(renderItem(child)));
-    card.appendChild(ul);
-  }
-  return card;
+/* -------------------------------
+   Init (single, merged)
+---------------------------------*/
+function init() {
+  buildSidebar();
+  autoTitleFromNav();
+  highlightRightRail();
 }
+document.addEventListener("DOMContentLoaded", init);
