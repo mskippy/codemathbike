@@ -20,10 +20,16 @@ const NAV = [
     ]},
 
     { label: "ICT 9", href: "/code/ict9/", children: [
-      { label: "U1 Game Development", href: "/code/ict9/units/u1_game_dev/", children: [] },
-      { label: "U2 Graphic Design", href: "/code/ict9/units/u2_graphic_design/", children: [] }
-      
-    ]}
+      { label: "U1 Intro & Digital Citizenship", href: "/code/ict9/units/u1_intro_n_digital_citizenship/", children: [
+        // Add lessons here, e.g.:
+        // { label: "1.1 Course Outline & Expectations", href: "/code/ict9/units/u1_intro_n_digital_citizenship/lesson_1_1.html" },
+        // { label: "1.2 20 Questions & Canva Poster", href: "/code/ict9/units/u1_intro_n_digital_citizenship/lesson_1_2.html" },
+      ]},
+      { label: "U2 Game Development", href: "/code/ict9/units/u2_game_development/", children: [] },
+      { label: "U3 Game Promotion", href: "/code/ict9/units/u3_game_promotion/", children: [] },
+      { label: "U4 Web Development", href: "/code/ict9/units/u4_web_development/", children: [] },
+    ]},
+    
   ]},
 
   { label: "Math", href: "/math/" },
