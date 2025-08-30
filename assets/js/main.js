@@ -238,6 +238,44 @@ function renderBreadcrumb(chain) {
   target.prepend(bc);
 }
 
+function renderContextLine(chain) {
+  // remove any old breadcrumb we might have inserted previously
+  document.querySelectorAll("#breadcrumb").forEach(el => el.remove());
+
+  const h1 = ensurePageTitleElement();
+  if (!h1) return;
+
+  // Course = first "ICT x" in chain
+  const course = (chain.find(n => /^ICT\s+\d/.test(n.label)) || {}).label || "";
+
+  // Unit = first "U#" in chain → "Unit #"
+  const unitNode = chain.find(n => /^U\d+/.test(n.label));
+  let unit = "";
+  if (unitNode) {
+    const m = unitNode.label.match(/^U(\d+)/i);
+    unit = m ? `Unit ${m[1]}` : unitNode.label;
+  }
+
+  // Lesson = leaf; if it starts with "x.x " then "Lesson x.x"
+  const leaf = chain[chain.length - 1] || {};
+  let lesson = "";
+  const m2 = (leaf.label || "").match(/^(\d+\.\d+)/);
+  if (m2) lesson = `Lesson ${m2[1]}`;
+
+  // Compose: Course • Unit • Lesson  (skip empties)
+  const parts = [course, unit, lesson].filter(Boolean);
+  if (!parts.length) return;
+
+  let ctx = document.getElementById("page-context");
+  if (!ctx) {
+    ctx = document.createElement("p");
+    ctx.id = "page-context";
+    ctx.className = "page-context small";
+    h1.insertAdjacentElement("afterend", ctx); // directly under the H1 (below the line)
+  }
+  ctx.textContent = parts.join(" • ");
+}
+
 function autoTitleFromNav() {
   if (document.body?.dataset?.autoTitle === "off") return;
 
@@ -252,8 +290,8 @@ function autoTitleFromNav() {
   const h1 = ensurePageTitleElement();
   if (h1 && h1.dataset.lock !== "true") h1.textContent = best.label;
 
-  // Always render breadcrumb — now in the header
-  renderBreadcrumb(chain);
+  // ↓↓↓ Use context line under H1 instead of breadcrumb
+  renderContextLine(chain);
 }
 
 /* -------------------------------

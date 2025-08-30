@@ -71,6 +71,12 @@ img{
 
 div{ margin-top: 2em; }
 
+.page-context {
+  margin: .5rem 0 1.25rem;     /* sits nicely under the h1 underline */
+  color: #2563eb;              /* same blue vibe as links */
+  font-weight: 600;
+}
+
 /* =========================================================
    2) LAYOUT: GRID SHELL + REGIONS
    ========================================================= */
