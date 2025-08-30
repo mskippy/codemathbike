@@ -272,3 +272,17 @@ details > summary:focus::before{ color:#475569; }
   background:transparent; font-weight:700;
 }
 #sidebar .nav-card[data-href="/"] .navlist{ display:none !important; }
+
+/* ==========================================================
+6) Breadcrumbs
+=============================================================*/ 
+
+/* Breadcrumb line under H1 (auto) */
+.crumbs {
+  margin: .5rem 0 1.25rem;
+  font-size: 1rem;
+}
+.crumbs a { color: #111827; font-weight: 400; text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { opacity: .5; margin: 0 .35rem; }
+.crumbs .active { color: #2563eb; font-weight: 700; }

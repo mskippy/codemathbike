@@ -290,6 +290,11 @@ function autoTitleFromNav() {
   const h1 = ensurePageTitleElement();
   if (h1 && h1.dataset.lock !== "true") h1.textContent = best.label;
 
+    // Title + (optional) H1 text
+    document.title = chain.map(n => n.label).join(" · ") + SITE_TITLE_SUFFIX;
+    const h1 = ensurePageTitleElement();
+    if (h1 && h1.dataset.lock !== "true") h1.textContent = best.label;
+
   // ↓↓↓ Use context line under H1 instead of breadcrumb
   renderContextLine(chain);
 }
