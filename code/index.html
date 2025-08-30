@@ -6,37 +6,23 @@
   <title>CODE Courses</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    /* Landing page grid */
-    .course-grid {
+    /* namespace to this page only */
+    body.code-page .code-landing { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    body.code-page .course-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      justify-items: center;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(1rem, 2vw, 2rem);
+      align-items: stretch;
     }
-    .course-card {
-      text-align: center;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      background: #fff;
-      max-width: 300px;
-      cursor: pointer;
+    body.code-page .course-card {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem;
+      aspect-ratio: 4 / 3; padding: clamp(1.25rem, 2.5vw, 2rem);
+      border-radius: 1rem; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,.1);
+      text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s;
     }
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-    .course-card img {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 1rem;
-    }
-    .course-card h2 {
-      font-size: 1.2rem;
-      margin: 0;
-    }
+    body.code-page .course-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,.15); }
+    body.code-page .course-card img { width: 88px; height: 88px; aspect-ratio: 1/1; object-fit: contain; }
+    body.code-page .course-card h2 { margin: 0; font-size: clamp(1.1rem, 1.6vw, 1.35rem); text-align: center; text-wrap: balance; }
   </style>
 </head>
 <body>
@@ -46,7 +32,7 @@
 
   <main>
     <div class="course-grid">
-      <a href="../ict8/index.html" class="course-card">
+      <a href="/code/ict8/index.html" class="course-card">
         <img src="/code/assets/img/ict_8_icon.png" alt="ICT 8 Icon">
         <h2>ICT 8</h2>
       </a>
