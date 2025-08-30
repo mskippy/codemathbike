@@ -250,9 +250,11 @@ function autoTitleFromNav() {
 /* -------------------------------
    Init (single, merged)
 ---------------------------------*/
+// keep exactly one init():
 function init() {
   buildSidebar();
-  autoTitleFromNav();
-  highlightRightRail();
+  autoTitleFromNav();   // sets <title>, ensures/updates the H1, renders breadcrumb
+  highlightRightRail(); // optional: highlights active right-rail links
 }
 document.addEventListener("DOMContentLoaded", init);
+
