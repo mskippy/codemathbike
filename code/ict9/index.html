@@ -119,17 +119,46 @@
       </section>
     </main>
 
-    <!-- Right Sidebar -->
-    <aside id="sidebar-right">
-      <div class="card">
-        <h3>Course Outline</h3>
-        <p><a href="/code/ict9/assets/downloads/ict_9_course_outline.pdf" target="_blank" rel="noopener">View / Download</a></p>
+    <aside id="sidebar-right" aria-labelledby="contact-title">
+        <section class="card">
+          <h2 id="contact-title">Your teacher</h2>
+          <div class="contact-card">
+            <div>
+              <strong>Michelle Ahoy</strong><br />
+              <span class="small">Sutherland Secondary School (SD44)</span>
+            </div>
+          </div>
+          <h3>Contact</h3>
+          <ul class="list-tight">
+            <li>Email: <a href="mailto:mahoy@sd44.ca">mahoy@sd44.ca</a></li>
+            <li>Teams: <a href="#" aria-label="Open Teams chat (replace # with real link)">Message via Microsoft Teams</a></li>
+          </ul>
+          <p class="small">Best times to reach me: during breaks, tutorial, or by email anytime.</p>
+        </section>
+  
+        <section id="outline" class="card" aria-labelledby="outline-title">
+          <h2 id="outline-title">Course outline</h2>
+          <p><a href="/code/ict9/assets/downloads/ict_9_course_outline.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Course Outline (PDF) — opens in a new tab">
+           Course Outline (PDF)
+         </a>
+         </p>
+        </section>
+      </aside>
+    </div>
+  
+    <footer class="site-footer">
+      <div class="wrap">
+        <small>© <span id="year"></span> M. Ahoy · ICT 9 · Sutherland Secondary SD44</small>
       </div>
-      <div class="card">
-        <h3>Acceptable Use Agreement</h3>
-        <p><a href="/code/ict9/assets/downloads/acceptable_use_tech_agreement.pdf" target="_blank" rel="noopener">View / Download</a></p>
-      </div>
-    </aside>
-  </div>
+    </footer>
+  
+    <a class="to-top skip" href="#updates" aria-label="Back to top">↑ Top</a>
+  
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
