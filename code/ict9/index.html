@@ -1,60 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ICT 9 · codemathbike</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICT 9 — Welcome</title> <!-- autoTitleFromNav can overwrite if unlocked -->
+  <meta name="description" content="ICT 9 — course overview, units, schedule, and outline." />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="/assets/js/main.js" defer></script>
 </head>
-<body>
+
+<body class="has-right-rail">
+  <!-- Header + in-page nav (matches ICT 8 structure) -->
+  <header class="site-header">
+    <div class="page-title-wrap">
+      <!-- Lock so autoTitleFromNav won’t replace your custom H1 text -->
+      <h1 class="page-title" data-lock="true">ICT 9 — Sutherland Secondary SD44</h1>
+      <nav class="wrap" aria-label="Primary">
+        <a href="#what" aria-current="page">What we'll do</a>
+        <a href="#units">Units</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#outline">Course outline</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 3-column shell: left nav, main, right rail -->
   <div class="unit-shell layout-3">
-    <!-- Left Navigation -->
-    <aside id="sidebar"></aside>
+    <!-- Left sidebar built from NAV in main.js -->
+    <aside id="sidebar" aria-label="Site navigation"></aside>
 
-    <!-- Main Content -->
+    <!-- Main content -->
     <main id="content">
-      <!-- Keep h1 locked so auto-title won’t overwrite -->
-      <h1 class="page-title" data-lock="true">ICT 9</h1>
+      <!-- What we’ll do (parallels ICT 8) -->
+      <section id="what" class="card">
+        <h2>What we’ll be doing</h2>
+        <div class="two-col">
+          <ul class="list-tight">
+            <li><strong>U1 Intro & Digital Citizenship:</strong> course expectations, 20-Questions survey, Canva “About Me,” Acceptable Use Agreement, AI & digital-literacy norms.</li>
+            <li><strong>U2 Game Development (GDevelop):</strong> setup, movement, collisions, collectibles, enemies, levels, polish, export.</li>
+          </ul>
+          <ul class="list-tight">
+            <li><strong>U3 Game Promotion (Poster):</strong> simple brand kit, layout in Adobe/Canva, copywriting, export for print/web.</li>
+            <li><strong>U4 Web Development (Trailer + Site):</strong> plan & edit a 30–60s trailer, build a one-page game site, publish.</li>
+          </ul>
+          <p class="small">We’ll sprinkle in short <em>mini-lessons</em> on smart/ethical AI use, file management, and attribution.</p>
+        </div>
+      </section>
 
-      <!-- Overview -->
-      <section class="card">
-        <h2>Course Overview</h2>
-        <p>Welcome to ICT 9! We’ll build creative and practical skills through a full game production cycle—designing a platform game, creating promotional assets, cutting a trailer, and publishing a simple website for your game. Along the way we’ll weave in brief mini-lessons on AI use and digital literacy.</p>
-        <ul class="list-tight">
-          <li><strong>U1 Intro &amp; Digital Citizenship</strong>: course structures, expectations, 20-Questions survey, Canva “About Me”, Acceptable Use Agreement, intro to AI &amp; digital-literacy norms.</li>
-          <li><strong>U2 Game Development (GDevelop)</strong>: set-up, movement, collisions, collectibles, enemies, levels, polish, export.</li>
-          <li><strong>U3 Game Promotion (Poster)</strong>: brand kit basics, poster layout (Adobe/Canva), copywriting, export for print/web.</li>
-          <li><strong>U4 Web Development (Trailer + Site)</strong>: plan and edit a short trailer, then ship a one-page game site and publish.</li>
+      <!-- Units quick links (same pattern as ICT 8) -->
+      <section id="units" class="card">
+        <h2>Units of Study</h2>
+        <p class="unit-sub small">Quick navigation to unit home pages.</p>
+        <ul class="navlist">
+          <li><a href="/code/ict9/units/u1_intro_n_digital_citizenship/index.html">U1. Intro & Digital Citizenship</a></li>
+          <li><a href="/code/ict9/units/u2_game_development/index.html">U2. Game Development (GDevelop)</a></li>
+          <li><a href="/code/ict9/units/u3_game_promotion/index.html">U3. Game Promotion (Poster)</a></li>
+          <li><a href="/code/ict9/units/u4_web_development/index.html">U4. Web Development (Trailer + Site)</a></li>
         </ul>
       </section>
 
-      <!-- What we'll do -->
-      <section class="card">
-        <h2>What We’ll Do</h2>
-        <ul>
-          <li><strong>Build</strong> a side-scroll platformer in <em>GDevelop</em>.</li>
-          <li><strong>Create</strong> a promotional poster and simple brand assets.</li>
-          <li><strong>Edit</strong> a 30–60s game trailer with titles and music.</li>
-          <li><strong>Publish</strong> a one-page website for your game and link your trailer.</li>
-          <li><strong>Mini-lessons</strong> sprinkled throughout: smart/ethical AI use, file management, image/audio sourcing, and attribution.</li>
-        </ul>
-        <p><em>Tip:</em> Save frequently and keep your folders organized under <code>H:</code> or OneDrive.</p>
-      </section>
-
-      <!-- Quick links into units (optional; keeps parity with ICT 8) -->
-      <section class="card">
-        <h2>Units</h2>
-        <ul>
-          <li><a href="/code/ict9/units/u1_intro_n_digital_citizenship/">U1 Intro &amp; Digital Citizenship</a></li>
-          <li><a href="/code/ict9/units/u2_game_development/">U2 Game Development (GDevelop)</a></li>
-          <li><a href="/code/ict9/units/u3_game_promotion/">U3 Game Promotion (Poster)</a></li>
-          <li><a href="/code/ict9/units/u4_web_development/">U4 Web Development (Trailer + Site)</a></li>
-        </ul>
-      </section>
-
-      <!-- Schedule (same styling as ICT 8) -->
+      <!-- Schedule (identical structure to ICT 8) -->
       <section id="schedule" class="card">
-        <h2>Ms. Ahoy’s Schedule</h2>
+        <h2>Ms. Ahoy's Schedule</h2>
         <h3>Semester 1</h3>
         <div class="table-wrap">
           <table class="schedule-table">
@@ -115,50 +122,50 @@
             </tbody>
           </table>
         </div>
-        <!-- Optional: add a Semester 2 table later -->
+        <!-- Add Semester 2 later if needed -->
       </section>
     </main>
 
+    <!-- Right rail: contact + outline (same as ICT 8 pattern) -->
     <aside id="sidebar-right" aria-labelledby="contact-title">
-        <section class="card">
-          <h2 id="contact-title">Your teacher</h2>
-          <div class="contact-card">
-            <div>
-              <strong>Michelle Ahoy</strong><br />
-              <span class="small">Sutherland Secondary School (SD44)</span>
-            </div>
+      <section class="card">
+        <h2 id="contact-title">Your teacher</h2>
+        <div class="contact-card">
+          <div>
+            <strong>Michelle Ahoy</strong><br />
+            <span class="small">Sutherland Secondary School (SD44)</span>
           </div>
-          <h3>Contact</h3>
-          <ul class="list-tight">
-            <li>Email: <a href="mailto:mahoy@sd44.ca">mahoy@sd44.ca</a></li>
-            <li>Teams: <a href="#" aria-label="Open Teams chat (replace # with real link)">Message via Microsoft Teams</a></li>
-          </ul>
-          <p class="small">Best times to reach me: during breaks, tutorial, or by email anytime.</p>
-        </section>
-  
-        <section id="outline" class="card" aria-labelledby="outline-title">
-          <h2 id="outline-title">Course outline</h2>
-          <p><a href="/code/ict9/assets/downloads/ict_9_course_outline.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Course Outline (PDF) — opens in a new tab">
-           Course Outline (PDF)
-         </a>
-         </p>
-        </section>
-      </aside>
+        </div>
+        <h3>Contact</h3>
+        <ul class="list-tight">
+          <li>Email: <a href="mailto:mahoy@sd44.ca">mahoy@sd44.ca</a></li>
+          <li>Teams: <a href="#" aria-label="Open Teams chat (replace # with real link)">Message via Microsoft Teams</a></li>
+        </ul>
+        <p class="small">Best times to reach me: during breaks, tutorial, or by email anytime.</p>
+      </section>
+
+      <section id="outline" class="card" aria-labelledby="outline-title">
+        <h2 id="outline-title">Course outline</h2>
+        <p>
+          <a href="/code/ict9/assets/downloads/ict_9_course_outline.pdf"
+             target="_blank" rel="noopener noreferrer">
+            Course Outline (PDF)
+          </a>
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <small>© <span id="year"></span> M. Ahoy · ICT 9 · Sutherland Secondary SD44</small>
     </div>
-  
-    <footer class="site-footer">
-      <div class="wrap">
-        <small>© <span id="year"></span> M. Ahoy · ICT 9 · Sutherland Secondary SD44</small>
-      </div>
-    </footer>
-  
-    <a class="to-top skip" href="#updates" aria-label="Back to top">↑ Top</a>
-  
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+  </footer>
+
+  <a class="to-top skip" href="#what" aria-label="Back to top">↑ Top</a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
