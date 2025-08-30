@@ -195,86 +195,75 @@ function ensurePageTitleElement() {
   }
   return h1;
 }
-function renderBreadcrumb(chain) {
-  // Prefer the header’s title wrap; create one if missing
-  let target =
-    document.querySelector(".site-header .page-title-wrap") ||
-    document.querySelector(".site-header");
 
-  if (!target) {
-    // build a minimal header so crumbs never land in #content
-    const hdr = document.createElement("header");
-    hdr.className = "site-header";
-    const wrap = document.createElement("div");
-    wrap.className = "page-title-wrap";
-    hdr.appendChild(wrap);
-    document.body.prepend(hdr);
-    target = wrap;
-  }
 
-  // remove any old breadcrumb (e.g., ones previously injected in #content)
-  document.querySelectorAll("#breadcrumb").forEach(el => el.remove());
+function renderCrumbs(chain) {
+  // Don’t duplicate if page already has manual crumbs
+  if (document.querySelector('p.crumbs')) return;
 
-  // build breadcrumb
-  const bc = document.createElement("p");
-  bc.id = "breadcrumb";
-  bc.className = "small";
-
-  chain.forEach((n, i) => {
-    if (i) bc.append(" › ");
-    if (i < chain.length - 1) {
-      const a = document.createElement("a");
-      a.href = n.href;
-      a.textContent = n.label;
-      bc.append(a);
-    } else {
-      const strong = document.createElement("strong");
-      strong.textContent = n.label;
-      bc.append(strong);
-    }
-  });
-
-  // Put crumbs ABOVE the H1 in the header
-  target.prepend(bc);
-}
-
-function renderContextLine(chain) {
-  // remove any old breadcrumb we might have inserted previously
-  document.querySelectorAll("#breadcrumb").forEach(el => el.remove());
+  // Remove any old variants
+  document.getElementById('breadcrumb')?.remove();
+  document.getElementById('page-context')?.remove();
 
   const h1 = ensurePageTitleElement();
   if (!h1) return;
 
-  // Course = first "ICT x" in chain
-  const course = (chain.find(n => /^ICT\s+\d/.test(n.label)) || {}).label || "";
-
-  // Unit = first "U#" in chain → "Unit #"
+  const course = chain.find(n => /^ICT\s+\d/.test(n.label));
   const unitNode = chain.find(n => /^U\d+/.test(n.label));
-  let unit = "";
-  if (unitNode) {
-    const m = unitNode.label.match(/^U(\d+)/i);
-    unit = m ? `Unit ${m[1]}` : unitNode.label;
-  }
-
-  // Lesson = leaf; if it starts with "x.x " then "Lesson x.x"
   const leaf = chain[chain.length - 1] || {};
-  let lesson = "";
-  const m2 = (leaf.label || "").match(/^(\d+\.\d+)/);
-  if (m2) lesson = `Lesson ${m2[1]}`;
+  const mLesson = (leaf.label || '').match(/^(\d+\.\d+)/);
+  const lessonLabel = mLesson ? `Lesson ${mLesson[1]}` : '';
 
-  // Compose: Course • Unit • Lesson  (skip empties)
-  const parts = [course, unit, lesson].filter(Boolean);
-  if (!parts.length) return;
+  // Need at least course and (unit or lesson)
+  if (!course || (!unitNode && !lessonLabel)) return;
 
-  let ctx = document.getElementById("page-context");
-  if (!ctx) {
-    ctx = document.createElement("p");
-    ctx.id = "page-context";
-    ctx.className = "page-context small";
-    h1.insertAdjacentElement("afterend", ctx); // directly under the H1 (below the line)
+  const p = document.createElement('p');
+  p.className = 'crumbs';           // styled in CSS
+
+  // Course (black link)
+  const aCourse = document.createElement('a');
+  aCourse.href = course.href || '#';
+  aCourse.textContent = course.label;
+  p.appendChild(aCourse);
+
+  // Unit (link or active)
+  if (unitNode) {
+    const sep1 = document.createElement('span');
+    sep1.className = 'sep'; sep1.textContent = ' • ';
+    p.appendChild(sep1);
+
+    const unitText = unitNode.label.replace(/^U(\d+).*/i, 'Unit $1');
+
+    if (!lessonLabel && leaf === unitNode) {
+      // Unit index page → unit is active (blue/bold)
+      const spanUnit = document.createElement('span');
+      spanUnit.className = 'active';
+      spanUnit.textContent = unitText;
+      p.appendChild(spanUnit);
+    } else {
+      const aUnit = document.createElement('a');
+      aUnit.href = unitNode.href || '#';
+      aUnit.textContent = unitText;
+      p.appendChild(aUnit);
+    }
   }
-  ctx.textContent = parts.join(" • ");
+
+  // Lesson (active, blue/bold)
+  if (lessonLabel) {
+    const sep2 = document.createElement('span');
+    sep2.className = 'sep'; sep2.textContent = ' › ';
+    p.appendChild(sep2);
+
+    const spanLesson = document.createElement('span');
+    spanLesson.className = 'active';
+    spanLesson.textContent = lessonLabel;
+    p.appendChild(spanLesson);
+  }
+
+  // Insert directly under the H1
+  h1.insertAdjacentElement('afterend', p);
 }
+
 
 function autoTitleFromNav() {
   if (document.body?.dataset?.autoTitle === "off") return;
@@ -284,17 +273,17 @@ function autoTitleFromNav() {
 
   const chain = chainToRoot(best);
 
-  const chainText = chain.map(n => n.label).join(" · ");
-  document.title = chainText + SITE_TITLE_SUFFIX;
-
-  // Title + (optional) H1 text
+  // Set tab title once
   document.title = chain.map(n => n.label).join(" · ") + SITE_TITLE_SUFFIX;
+
+  // Ensure/optionally set H1
   const h1 = ensurePageTitleElement();
   if (h1 && h1.dataset.lock !== "true") h1.textContent = best.label;
 
-  // ↓↓↓ Use context line under H1 instead of breadcrumb
-  renderContextLine(chain);
+  // Under-H1 crumbs (our only breadcrumb system)
+  renderCrumbs(chain);
 }
+
 
 /* -------------------------------
    Init (single, merged)

@@ -278,11 +278,8 @@ details > summary:focus::before{ color:#475569; }
 =============================================================*/ 
 
 /* Breadcrumb line under H1 (auto) */
-.crumbs {
-  margin: .5rem 0 1.25rem;
-  font-size: 1rem;
-}
+.crumbs { margin: .5rem 0 1.25rem; font-size: 1rem; }
 .crumbs a { color: #111827; font-weight: 400; text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; }
 .crumbs .sep { opacity: .5; margin: 0 .35rem; }
-.crumbs .active { color: #2563eb; font-weight: 700; }
+.crumbs .active { color: #3498db; font-weight: 700; }
